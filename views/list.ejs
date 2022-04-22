@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content="Starter Snowpack App" />
+    <title>To do list</title>
+    <link rel="stylesheet" href="css/styles.css">
+
+  </head>
+  <body>
+    <div class="box" id="heading">
+      <h1> <%= todaysDate%> </h1>
+    </div>
+
+    <div class="box">
+      <% for(let i=0; i<addNewItem.length; i++){%>
+     
+      <div class="item">
+         <input type="checkbox">
+        <p> <%= addNewItem[i]%> </p>
+        
+      </div>
+       
+      <% }%>  
+         
+      <form class="item" action="/" method="post">
+        <input type="text" name="newItem" placeholder="New Item">
+        <button type="submit" name="button">+</button>
+      </form>
+         
+    </div>
+    
+    <h1> </h1>
+    
+
+   
+  </body>
+</html>
