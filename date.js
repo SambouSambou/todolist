@@ -1,8 +1,7 @@
 //jshint esversion:6
 
-const { set } = require("express/lib/application");
-
-module.exports = getDate;
+module.exports.getDate = getDate;
+module.exports.displayTime = displayTime;
 
 
 function getDate(){
@@ -27,7 +26,7 @@ function getDate(){
 
 
 
-/*
+
 
 function displayTime(){
     let dateTime = new Date();
@@ -45,4 +44,3 @@ function displayTime(){
     console.log(hrs + ":" + mins + ":"+ secs + " "+ sessions);
 
 }
-*/

@@ -1,6 +1,5 @@
 const express = require('express');
 const bodyParser = require("body-parser");
-const { set } = require('express/lib/application');
 const date = require(__dirname + "/date.js");
 
 const app = express();
@@ -19,7 +18,7 @@ let workItems = [];
 
 app.get('/', function(req, res){
    
-    let day = date();
+    let day = date.getDate();
 
     res.render("list", {
         listTitle: day,
@@ -48,7 +47,7 @@ app.post('/', function(req, res){
 
 app.get('/work', function(req, res){
 
-    let day = date();
+    let day = date.getDate();
 
     res.render("list", 
     {
