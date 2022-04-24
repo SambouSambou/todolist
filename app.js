@@ -1,5 +1,7 @@
 const express = require('express');
 const bodyParser = require("body-parser");
+const { set } = require('express/lib/application');
+const date = require(__dirname + "/date.js");
 
 const app = express();
 const port = "8000";
@@ -9,63 +11,56 @@ app.set('view engine', 'ejs');
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(express.static("public"));
 
-let today = new Date();
 let items =[];
+let workItems = [];
 
 
 
 
 app.get('/', function(req, res){
-    let options ={
-        weekday: "long",
-        month: "long",
-        day: "numeric",
-        year: "numeric",
-        hour: "numeric",
-        minute: "numeric",
-        second: "2-digit"
-    };
-    
-    var day = today.toLocaleDateString("en-US", options);
+   
+    let day = date();
 
     res.render("list", {
-        todaysDate: day,
+        listTitle: day,
         addNewItem: items
     });
+
+    
 });
-
-
 
 
 app.post('/', function(req, res){
 
     let item = req.body.newItem;
 
-     items.push(item);
+    if (req.body.list === "Work"){
+        workItems.push(item);
+        res.redirect('/work')
+    }else{
+        items.push(item);
      
     res.redirect('/')
-})
-
-
-
-
-
-function displayTime(){
-    let dateTime = new Date();
-
-    let hrs = dateTime.getHours();
-    let mins = dateTime.getMinutes();
-    let secs = dateTime.getSeconds();
-    let sessions = "AM";
-
-    if(hrs > 12){
-        sessions = "PM"
-        hrs = hrs - 12;
     }
-    
-    console.log(hrs + ":" + mins + ":"+ secs + " "+ sessions);
 
-}
+     
+});
+
+app.get('/work', function(req, res){
+
+    let day = date();
+
+    res.render("list", 
+    {
+        listTitle: "Work List " + day,
+        addNewItem: workItems
+    } );
+
+});
+
+app.get('/about', function(req, res){
+    res.render("about")
+});
 
 
 
