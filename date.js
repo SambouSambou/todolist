@@ -1,13 +1,13 @@
 //jshint esversion:6
 
-module.exports.getDate = getDate;
-module.exports.displayTime = displayTime;
 
 
-function getDate(){
-    let today = new Date();
 
-    let options ={
+
+exports.getDate = function(){
+    const today = new Date();
+
+    const options ={
         weekday: "long",
         month: "long",
         day: "numeric",
@@ -18,7 +18,7 @@ function getDate(){
     };
 
     
-    var day = today.toLocaleDateString("en-US", options);
+    const day = today.toLocaleDateString("en-US", options);
 
     return day;
 
@@ -28,13 +28,13 @@ function getDate(){
 
 
 
-function displayTime(){
-    let dateTime = new Date();
+exports.displayTime = function(){
+    const dateTime = new Date();
 
-    let hrs = dateTime.getHours();
-    let mins = dateTime.getMinutes();
-    let secs = dateTime.getSeconds();
-    let sessions = "AM";
+    const hrs = dateTime.getHours();
+    const mins = dateTime.getMinutes();
+    const secs = dateTime.getSeconds();
+    const sessions = "AM";
 
     if(hrs > 12){
         sessions = "PM"
