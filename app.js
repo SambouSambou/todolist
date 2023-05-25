@@ -1,6 +1,6 @@
 const express = require('express');
 const bodyParser = require("body-parser");
-const date = require(__dirname + "/date.js");
+const mongoose = require('mongoose');
 
 const app = express();
 const port = "8000";
@@ -10,18 +10,23 @@ app.set('view engine', 'ejs');
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(express.static("public"));
 
-const items =[];
-const workItems = [];
+mongoose.connect("mongodb://localhost:27017/todolistDB", {userNewUrlParser: true})
+
+const itemsSchema = {
+    name : String
+}
+
+const Item = mongoose.model("Item", "itemsSchema")
 
 
 
 
 app.get('/', function(req, res){
    
-    const day = date.getDate();
+   
 
     res.render("list", {
-        listTitle: day,
+        listTitle: "Today",
         addNewItem: items
     });
 
